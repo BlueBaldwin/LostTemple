@@ -20,7 +20,7 @@ namespace Puzzles
         public void Init(bool isOffset, int number)
         {
             _renderer.color = isOffset ? _offsetColor : _baseColor;
-            _renderer.color = _initialColor;
+            _initialColor = _renderer.color;
             SetNumber(number);
         }
 

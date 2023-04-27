@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -51,22 +52,25 @@ namespace Puzzles
                         Debug.Log("Correct answer!");
 
                         // Move to the next round
-                        _numberMatchManager.UpdateRoundIndex();;
-                        ResetTileSelection();
+                        StartCoroutine(NewRound());
+                        StartCoroutine(ResetTileSelection());
                     }
                     else
                     {
                         Debug.Log("Incorrect answer!");
 
                         // Clear the selection
-                        ResetTileSelection();
+                        StartCoroutine(ResetTileSelection());
                     }
                 }
             }
         }
 
-        private void ResetTileSelection()
+        private IEnumerator ResetTileSelection()
         {
+            // create a delay coroutine for 1 second
+            yield return new WaitForSeconds(1f);
+
             if (_selectedTile1 != null)
             {
                 _selectedTile1.SetHighlightedColor(false);
@@ -78,6 +82,12 @@ namespace Puzzles
                 _selectedTile2.SetHighlightedColor(false);
                 _selectedTile2 = null;
             }
+        }
+
+        private IEnumerator NewRound()
+        {
+            yield return new WaitForSeconds(1f);
+            _numberMatchManager.UpdateRoundIndex();
         }
 
         private void GetMouseInput(Camera puzzleCamera, out Tile selectedTile, out Tile highlightedTile)

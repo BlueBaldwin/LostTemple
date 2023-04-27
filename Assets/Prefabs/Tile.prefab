@@ -276,6 +276,7 @@ MonoBehaviour:
   _renderer: {fileID: 3300881307689230074}
   _highlight: {fileID: 6573432340561902278, guid: 25fccb491064d124980d64d0f65860c9, type: 3}
   numberText: {fileID: 4700094418479457879}
+  _highlightedColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!61 &131778105268593299
 BoxCollider2D:
   m_ObjectHideFlags: 0

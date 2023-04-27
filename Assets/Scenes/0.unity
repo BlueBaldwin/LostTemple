@@ -13762,7 +13762,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh26398
+  m_Name: pb_Mesh26406
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -63525,9 +63525,9 @@ GameObject:
   - component: {fileID: 1405579057}
   - component: {fileID: 1405579056}
   - component: {fileID: 1405579055}
-  - component: {fileID: 1405579061}
   - component: {fileID: 1405579064}
   - component: {fileID: 1405579063}
+  - component: {fileID: 1405579065}
   m_Layer: 0
   m_Name: PuzzleBoard
   m_TagString: Untagged
@@ -63862,18 +63862,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1405579061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1405579054}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4d4366a5d174a9ba7c3d2abfa277111, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1405579063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63907,6 +63895,19 @@ MonoBehaviour:
   _height: 3
   _tilePrefab: {fileID: -682898268654881502, guid: 57a029a87e2767142963c3c7493e1865, type: 3}
   _gridPosition: {fileID: 1980675191}
+  puzzleCamera: {fileID: 1431440414}
+--- !u!114 &1405579065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405579054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2289b9343bf542c18ca02765519fab30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   puzzleCamera: {fileID: 1431440414}
 --- !u!1 &1419841560
 GameObject:
