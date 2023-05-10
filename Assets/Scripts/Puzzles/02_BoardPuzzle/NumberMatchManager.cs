@@ -26,6 +26,8 @@ namespace Puzzles
         public int RoundIndex => _roundIndex;
 
         public event Action OnPuzzleGenerate;
+        
+        public static event Action OnPuzzleComplete;
 
         private void Awake()
         {
@@ -59,7 +61,7 @@ namespace Puzzles
 
         void UpdateQuestionText(int targetNumber)
         {
-            _questionText.text = $"Match two numbers that add to: {targetNumber}";
+            _questionText.text = $"Pick two numbers that make: {targetNumber}";
         }
 
         private void PopulatePuzzleLists()
@@ -109,6 +111,7 @@ namespace Puzzles
             if (_roundIndex == PuzzleGenerator.Instance.PuzzleRounds)
             {
                 Debug.Log("Puzzle Complete");
+                OnPuzzleComplete?.Invoke();
             }
             else
             {

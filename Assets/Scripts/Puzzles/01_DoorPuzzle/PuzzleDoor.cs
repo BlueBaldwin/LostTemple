@@ -18,9 +18,13 @@ namespace Puzzles
         [SerializeField] private Scale scale1;
         [SerializeField] private Scale scale2;
         [SerializeField] private int answerWeight;
+
+        [Header("Camera Shake Settings")]
+        [SerializeField] private float shakeDuration;
         
         private int _scale1Weight;
         private int _scale2Weight;
+        private bool _isDoorOpen;
 
         private CameraController _cameraController;
         
@@ -60,7 +64,11 @@ namespace Puzzles
             if (_scale1Weight + _scale2Weight == answerWeight)
             {
                 Debug.Log("Correct Weight! Door is opening!");
-                StartCoroutine(OpenDoor());
+                if (!_isDoorOpen)
+                {
+                    StartCoroutine(OpenDoor());
+                    _isDoorOpen = true;
+                }
             }
         }
 
@@ -72,12 +80,13 @@ namespace Puzzles
                 go = false;
                 Debug.Log("Correct Weight! Door is opening!");
                 StartCoroutine(OpenDoor());
+
             }
         }
 
         private IEnumerator OpenDoor()
         {
-            _cameraController.StartScreenShake();
+            CameraShake.Instance.ShakeCamera();
             Vector3 leftDoorStartPosition = leftDoor.transform.position;
             Vector3 rightDoorStartPosition = rightDoor.transform.position;
             float slideAmount = 1.5f;

@@ -18,23 +18,30 @@ namespace DefaultNamespace
         private float _shakeStrength;
 
         void LateUpdate()
-        {
-            if (!_isCameraShaking)
-            {
-                var cameraTransform = transform;
-                var position = target.position;
-                var position1 = cameraTransform.position;
-                Vector3 targetPosition = new Vector3(position.x, position.y + height, position.z - distance);
-                position1 = targetPosition;
-                cameraTransform.position = position1;
-                transform.rotation = Quaternion.LookRotation(position - position1);
-            }
-            else
+        { if (_isCameraShaking)
             {
                 Vector3 shakeVector = Random.insideUnitSphere * _shakeStrength;
                 Vector3 shakeOffset = new Vector3(shakeVector.x, shakeVector.y, 0);
                 transform.position += shakeOffset;
             }
+            // Switched to cinemashine insrted of this
+            
+            // if (!_isCameraShaking)
+            // {
+            //     var cameraTransform = transform;
+            //     var position = target.position;
+            //     var position1 = cameraTransform.position;
+            //     Vector3 targetPosition = new Vector3(position.x, position.y + height, position.z - distance);
+            //     position1 = targetPosition;
+            //     cameraTransform.position = position1;
+            //     transform.rotation = Quaternion.LookRotation(position - position1);
+            // }
+            // else
+            // {
+            //     Vector3 shakeVector = Random.insideUnitSphere * _shakeStrength;
+            //     Vector3 shakeOffset = new Vector3(shakeVector.x, shakeVector.y, 0);
+            //     transform.position += shakeOffset;
+            // }
         }
 
         public void StartScreenShake()

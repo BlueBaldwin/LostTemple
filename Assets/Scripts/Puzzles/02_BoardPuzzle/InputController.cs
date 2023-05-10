@@ -14,15 +14,29 @@ namespace Puzzles
         private Tile _highlightedTile;
         private Tile _selectedTile1;
         private Tile _selectedTile2;
+        private bool _isPuzzleCompleted;
 
         private void Awake()
         {
             _numberMatchManager = GetComponent<NumberMatchManager>();
         }
 
+        private void OnEnable()
+        {
+            NumberMatchManager.OnPuzzleComplete += DisableInput;
+        }
+
+        private void OnDisable()
+        {
+            NumberMatchManager.OnPuzzleComplete -= DisableInput;
+        }
+
         private void Update()
         {
-            HandleMouseInput();
+            if (!_isPuzzleCompleted)
+            {
+                HandleMouseInput();
+            }
         }
 
         private void HandleMouseInput()
@@ -116,6 +130,11 @@ namespace Puzzles
 
             // Create a debug ray to see where the mouse is pointing
             Debug.DrawRay(hoverRay.origin, hoverRay.direction * 100, Color.red);
+        }
+        
+        private void DisableInput()
+        {
+            _isPuzzleCompleted = true;
         }
     }
 }
