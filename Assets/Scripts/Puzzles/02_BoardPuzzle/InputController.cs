@@ -3,22 +3,28 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using Cinemachine; 
 
 namespace Puzzles
 {
     public class InputController : MonoBehaviour
     {
-        [SerializeField] private Camera puzzleCamera; 
-        
+        [SerializeField] private CinemachineVirtualCamera puzzleVirtualCamera;
         private NumberMatchManager _numberMatchManager;
         private Tile _highlightedTile;
         private Tile _selectedTile1;
         private Tile _selectedTile2;
         private bool _isPuzzleCompleted;
+        private Camera puzzleCamera; 
 
         private void Awake()
         {
             _numberMatchManager = GetComponent<NumberMatchManager>();
+        }
+
+        private void Start()
+        {
+            GetMainCamera(); // Call this method to set the puzzleCamera
         }
 
         private void OnEnable()
@@ -38,7 +44,7 @@ namespace Puzzles
                 HandleMouseInput();
             }
         }
-
+        
         private void HandleMouseInput()
         {
             Tile selectedTile;
@@ -130,6 +136,19 @@ namespace Puzzles
 
             // Create a debug ray to see where the mouse is pointing
             Debug.DrawRay(hoverRay.origin, hoverRay.direction * 100, Color.red);
+        }
+        private void GetMainCamera()
+        {
+            CinemachineBrain cinemachineBrain = CinemachineCore.Instance.FindPotentialTargetBrain(puzzleVirtualCamera);
+            if (cinemachineBrain != null)
+            {
+                puzzleCamera = cinemachineBrain.OutputCamera;
+            }
+            else
+            {
+                Debug.LogWarning("CinemachineBrain not found. Falling back to Camera.main.");
+                puzzleCamera = Camera.main;
+            }
         }
         
         private void DisableInput()

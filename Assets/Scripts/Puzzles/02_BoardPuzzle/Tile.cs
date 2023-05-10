@@ -37,7 +37,7 @@ namespace Puzzles
         public void SetNumber(int number)
         {
             numberText.text = number.ToString();
-            Debug.Log($"Tile {gameObject.name} number set to: {number}");
+            // Debug.Log($"Tile {gameObject.name} number set to: {number}");
         }
         public int GetNumber()
         {

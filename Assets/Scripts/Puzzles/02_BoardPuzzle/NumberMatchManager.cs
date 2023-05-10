@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cinemachine;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,7 +18,7 @@ namespace Puzzles
         [Header("Setup")]
         [SerializeField] private Tile _tilePrefab;
         [SerializeField] private GameObject _gridPosition;
-        [SerializeField] private Camera puzzleCamera;
+        [SerializeField] private CinemachineVirtualCamera puzzleCamera;
         
         private List<Tile> _tiles;
         private Tile _highlightedTile;

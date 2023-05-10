@@ -1,26 +1,26 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Cinemachine;
 
 namespace Puzzles
 {
     public class ToggleBoardPuzzle : MonoBehaviour
     {
-        [SerializeField] private Camera puzzleCamera;
         [SerializeField] private GameObject canvas;
         private PuzzleTrigger _puzzleTrigger;
         private bool _boardPuzzleActive;
 
+        [SerializeField] private CinemachineVirtualCamera puzzleVirtualCamera;
+        [SerializeField] private CinemachineVirtualCamera playerVirtualCamera;
         private void Awake()
         {
             _puzzleTrigger = GetComponentInChildren<PuzzleTrigger>();
-            puzzleCamera.gameObject.SetActive(false);
         }
 
         private void OnEnable()
         {
             _puzzleTrigger.onPuzzleBoardTriggered += TogglePuzzle;
-            Debug.Log("Puzzle Triggered");
+
         }
         
         private void OnDisable()
@@ -30,9 +30,19 @@ namespace Puzzles
 
         private void TogglePuzzle()
         {
+            Debug.Log("Puzzle Triggered");
             _boardPuzzleActive = true;
-            puzzleCamera.gameObject.SetActive(true);
-            canvas.gameObject.SetActive(true);
+            if (_boardPuzzleActive)
+            {
+                puzzleVirtualCamera.Priority = 2;
+                canvas.gameObject.SetActive(true);
+            }
+            else if (!_boardPuzzleActive)
+            {
+                puzzleVirtualCamera.Priority = 0;
+                canvas.gameObject.SetActive(false);
+            }
+            
         }
     }
 }
