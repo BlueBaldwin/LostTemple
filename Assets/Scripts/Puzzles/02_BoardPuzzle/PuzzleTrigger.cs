@@ -10,6 +10,9 @@ public class PuzzleTrigger : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        onPuzzleBoardToggle?.Invoke();
+        if (other.CompareTag("Player"))
+        {
+            onPuzzleBoardToggle?.Invoke();
+        }
     }
 }

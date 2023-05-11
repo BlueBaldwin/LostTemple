@@ -37,7 +37,7 @@ namespace Puzzles
             canvas.gameObject.SetActive(true);
         }
         
-        private void TogglePuzzleCameraOff()
+        private void TogglePuzzleCameraOff(int i)
         {
             puzzleVirtualCamera.Priority = 0;
             playerVirtualCamera.Priority = 1;

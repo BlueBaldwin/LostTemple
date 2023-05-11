@@ -28,7 +28,7 @@ namespace Puzzles
 
         public event Action OnPuzzleGenerate;
         
-        public static event Action OnPuzzleComplete;
+        public static event Action<int> OnPuzzleComplete;
 
         private void Awake()
         {
@@ -103,7 +103,7 @@ namespace Puzzles
             randomTile2.HasSolutionNumber = true;
             // Ensure the solution number is not used again
             FillerNumberGenerator.UsedNumbers.Add(solutionNumber2);
-            Debug.Log("The Answers are: " + solutionNumber1 + " and " + solutionNumber2);
+            // Debug.Log("The Answers are: " + solutionNumber1 + " and " + solutionNumber2);
         }
         
         public void UpdateRoundIndex()
@@ -112,7 +112,7 @@ namespace Puzzles
             if (_roundIndex == PuzzleGenerator.Instance.PuzzleRounds)
             {
                 Debug.Log("Puzzle Complete");
-                OnPuzzleComplete?.Invoke();
+                OnPuzzleComplete?.Invoke(GetPlayersScore());
             }
             else
             {
@@ -120,8 +120,8 @@ namespace Puzzles
             }
             
         }
-        
-        public void ResetPuzzle()
+
+        private void ResetPuzzle()
         {
             // Clear out the text of the tiles
             foreach (var tile in _tiles)
@@ -139,6 +139,12 @@ namespace Puzzles
             UpdateQuestionText(_puzzleSolutions[_roundIndex].answer);
         }
 
-
+        private int GetPlayersScore()
+        {
+            int score = 5;
+            // TO:DO Calculate the players score
+    
+            return score;
+        }
     }
 }

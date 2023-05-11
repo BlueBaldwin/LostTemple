@@ -133,7 +133,7 @@ namespace Puzzles
             Debug.DrawRay(hoverRay.origin, hoverRay.direction * 100, Color.red);
         }
 
-        private void DisableInput()
+        private void DisableInput(int i)
         {
             _isPuzzleCompleted = true;
         }
