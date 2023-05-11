@@ -6,12 +6,10 @@ namespace Puzzles
     public class ToggleBoardPuzzle : MonoBehaviour
     {
         [SerializeField] private GameObject canvas;
-        private PuzzleTrigger _puzzleTrigger;
-        private bool _boardPuzzleActive;
-        
         [SerializeField] private CinemachineVirtualCamera playerVirtualCamera;
-        [SerializeField] private Camera puzzleInputCamera;
         [SerializeField] private CinemachineVirtualCamera puzzleVirtualCamera;
+        
+        private PuzzleTrigger _puzzleTrigger;
         
         private void Awake()
         {
@@ -20,28 +18,34 @@ namespace Puzzles
 
         private void OnEnable()
         {
-            _puzzleTrigger.onPuzzleBoardTriggered += TogglePuzzle;
-        }
-        
-        private void OnDisable()
-        {
-            _puzzleTrigger.onPuzzleBoardTriggered -= TogglePuzzle;
+            _puzzleTrigger.onPuzzleBoardToggle += TogglePuzzleCameraOn;
+            NumberMatchManager.OnPuzzleComplete += TogglePuzzleCameraOff;
         }
 
-        private void TogglePuzzle()
+        private void OnDisable()
+        {
+            _puzzleTrigger.onPuzzleBoardToggle -= TogglePuzzleCameraOn;
+            NumberMatchManager.OnPuzzleComplete -= TogglePuzzleCameraOff;
+        }
+
+        private void TogglePuzzleCameraOn()
         {
             Debug.Log("Puzzle Triggered");
-            _boardPuzzleActive = !_boardPuzzleActive;
             
-            if (_boardPuzzleActive)
+            puzzleVirtualCamera.Priority = 1;
+            playerVirtualCamera.Priority = 0;
+            canvas.gameObject.SetActive(true);
+        }
+        
+        private void TogglePuzzleCameraOff()
+        {
+            puzzleVirtualCamera.Priority = 0;
+            playerVirtualCamera.Priority = 1;
+            canvas.gameObject.SetActive(false);
+            
+            if (_puzzleTrigger != null)
             {
-                puzzleVirtualCamera.Priority = 2;
-                canvas.gameObject.SetActive(true);
-            }
-            else
-            {
-                puzzleVirtualCamera.Priority = 0;
-                canvas.gameObject.SetActive(false);
+                Destroy(_puzzleTrigger);
             }
         }
 

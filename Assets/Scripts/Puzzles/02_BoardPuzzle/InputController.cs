@@ -49,7 +49,7 @@ namespace Puzzles
             if (selectedTile != null)
             {
                 string name = selectedTile.name;
-                Debug.Log($"Tile {name} clicked, number: {selectedTile.GetNumber()}");
+                // Debug.Log($"Tile {name} clicked, number: {selectedTile.GetNumber()}");
 
                 if (_selectedTile1 == null)
                 {

@@ -6,30 +6,10 @@ using UnityEngine;
 
 public class PuzzleTrigger : MonoBehaviour
 {
-    public Action onPuzzleBoardTriggered;
-
-    private bool _isPuzzleComplete;
-
-    private void OnEnable()
-    {
-       NumberMatchManager.OnPuzzleComplete += SetCompletionState;
-    }
+    public Action onPuzzleBoardToggle;
     
-    private void OnDisable()
-    {
-        NumberMatchManager.OnPuzzleComplete -= SetCompletionState;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (!_isPuzzleComplete)
-        {
-            onPuzzleBoardTriggered?.Invoke();    
-        }
-    }
-
-    private void SetCompletionState()
-    {
-        _isPuzzleComplete = true;
+        onPuzzleBoardToggle?.Invoke();
     }
 }
