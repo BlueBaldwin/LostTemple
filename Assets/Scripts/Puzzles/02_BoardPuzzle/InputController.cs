@@ -9,22 +9,17 @@ namespace Puzzles
 {
     public class InputController : MonoBehaviour
     {
-        [SerializeField] private CinemachineVirtualCamera puzzleVirtualCamera;
+        [SerializeField] private Camera puzzleInputCamera;
+        
         private NumberMatchManager _numberMatchManager;
         private Tile _highlightedTile;
         private Tile _selectedTile1;
         private Tile _selectedTile2;
         private bool _isPuzzleCompleted;
-        private Camera puzzleCamera; 
 
         private void Awake()
         {
             _numberMatchManager = GetComponent<NumberMatchManager>();
-        }
-
-        private void Start()
-        {
-            GetMainCamera(); // Call this method to set the puzzleCamera
         }
 
         private void OnEnable()
@@ -49,7 +44,7 @@ namespace Puzzles
         {
             Tile selectedTile;
             Tile newHighlightedTile;
-            GetMouseInput(puzzleCamera, out selectedTile, out newHighlightedTile);
+            GetMouseInput(puzzleInputCamera, out selectedTile, out newHighlightedTile);
 
             if (selectedTile != null)
             {
@@ -137,20 +132,7 @@ namespace Puzzles
             // Create a debug ray to see where the mouse is pointing
             Debug.DrawRay(hoverRay.origin, hoverRay.direction * 100, Color.red);
         }
-        private void GetMainCamera()
-        {
-            CinemachineBrain cinemachineBrain = CinemachineCore.Instance.FindPotentialTargetBrain(puzzleVirtualCamera);
-            if (cinemachineBrain != null)
-            {
-                puzzleCamera = cinemachineBrain.OutputCamera;
-            }
-            else
-            {
-                Debug.LogWarning("CinemachineBrain not found. Falling back to Camera.main.");
-                puzzleCamera = Camera.main;
-            }
-        }
-        
+
         private void DisableInput()
         {
             _isPuzzleCompleted = true;

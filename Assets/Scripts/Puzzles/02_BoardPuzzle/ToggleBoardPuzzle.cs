@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Cinemachine;
 
 namespace Puzzles
@@ -9,9 +8,11 @@ namespace Puzzles
         [SerializeField] private GameObject canvas;
         private PuzzleTrigger _puzzleTrigger;
         private bool _boardPuzzleActive;
-
-        [SerializeField] private CinemachineVirtualCamera puzzleVirtualCamera;
+        
         [SerializeField] private CinemachineVirtualCamera playerVirtualCamera;
+        [SerializeField] private Camera puzzleInputCamera;
+        [SerializeField] private CinemachineVirtualCamera puzzleVirtualCamera;
+        
         private void Awake()
         {
             _puzzleTrigger = GetComponentInChildren<PuzzleTrigger>();
@@ -20,7 +21,6 @@ namespace Puzzles
         private void OnEnable()
         {
             _puzzleTrigger.onPuzzleBoardTriggered += TogglePuzzle;
-
         }
         
         private void OnDisable()
@@ -31,18 +31,20 @@ namespace Puzzles
         private void TogglePuzzle()
         {
             Debug.Log("Puzzle Triggered");
-            _boardPuzzleActive = true;
+            _boardPuzzleActive = !_boardPuzzleActive;
+            
             if (_boardPuzzleActive)
             {
                 puzzleVirtualCamera.Priority = 2;
                 canvas.gameObject.SetActive(true);
             }
-            else if (!_boardPuzzleActive)
+            else
             {
                 puzzleVirtualCamera.Priority = 0;
                 canvas.gameObject.SetActive(false);
             }
-            
         }
+
+        
     }
 }

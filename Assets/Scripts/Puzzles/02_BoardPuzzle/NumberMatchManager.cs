@@ -18,7 +18,7 @@ namespace Puzzles
         [Header("Setup")]
         [SerializeField] private Tile _tilePrefab;
         [SerializeField] private GameObject _gridPosition;
-        [SerializeField] private CinemachineVirtualCamera puzzleCamera;
+        [SerializeField] private Camera puzzleInputCamera;
         
         private List<Tile> _tiles;
         private Tile _highlightedTile;
@@ -51,7 +51,7 @@ namespace Puzzles
             AssignAnswers();
             // Manually setting the cameras transform to ensure the puzzle is centred
             var position = _gridPosition.transform.position;
-            var transform1 = puzzleCamera.transform;
+            var transform1 = puzzleInputCamera.transform;
             transform1.position = new Vector3(position.x, position.y, transform1.position.z);
         }
         
