@@ -112,6 +112,7 @@ namespace Puzzles
             if (_roundIndex == PuzzleGenerator.Instance.PuzzleRounds)
             {
                 Debug.Log("Puzzle Complete");
+                PlayerController.CanMove = true;
                 OnPuzzleComplete?.Invoke(GetPlayersScore());
             }
             else

@@ -13,6 +13,7 @@ public class PuzzleTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             onPuzzleBoardToggle?.Invoke();
+            PlayerController.CanMove = false;
         }
     }
 }

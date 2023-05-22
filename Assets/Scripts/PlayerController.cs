@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]  float angleStep = 22.5f; 
     [SerializeField] GameObject holdPosition;
 
+    // Property for the CanMove variable
+    public static bool CanMove { get; set; }
+    
+    
     private Vector2 _movementInput;
     private Rigidbody _rb;
     private Input _input;
@@ -24,7 +28,9 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _input = new Input();
+        CanMove = true;
     }
+    
 
     private void OnEnable()
     {
@@ -40,6 +46,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+
         _movementInput = _input.Player.Move.ReadValue<Vector2>();
     }
 
@@ -54,6 +61,7 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
+        if (!CanMove) return;
         float targetAngle = Mathf.Atan2(_movementInput.x, _movementInput.y) * Mathf.Rad2Deg;
         Quaternion targetRotation = Quaternion.Euler(0, targetAngle, 0);
         Vector3 moveDirection = targetRotation * new Vector3(0, 0, 1);
