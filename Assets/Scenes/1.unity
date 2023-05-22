@@ -11853,7 +11853,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13186,9 +13186,7 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 473501805}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras:
-  - {fileID: 888197546}
-  - {fileID: 1161514007}
+  m_ChildCameras: []
   m_Instructions:
   - m_FullHash: -1211623630
     m_VirtualCamera: {fileID: 888197546}
@@ -22706,7 +22704,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -64865,7 +64864,7 @@ MonoBehaviour:
   _height: 3
   _tilePrefab: {fileID: -682898268654881502, guid: 57a029a87e2767142963c3c7493e1865, type: 3}
   _gridPosition: {fileID: 1980675191}
-  puzzleCamera: {fileID: 1161514009}
+  puzzleInputCamera: {fileID: 0}
 --- !u!114 &1405579065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64878,7 +64877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2289b9343bf542c18ca02765519fab30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleCamera: {fileID: 1161514009}
+  puzzleInputCamera: {fileID: 0}
 --- !u!114 &1405579066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64892,8 +64891,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1842658055}
-  puzzleVirtualCamera: {fileID: 1161514007}
   playerVirtualCamera: {fileID: 888197546}
+  puzzleVirtualCamera: {fileID: 1161514007}
 --- !u!1 &1419841560
 GameObject:
   m_ObjectHideFlags: 0
@@ -79750,7 +79749,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
