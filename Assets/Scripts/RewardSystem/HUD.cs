@@ -18,7 +18,7 @@ namespace RewardSystem
         private void UpdateRewardScore()
         {
             _totalScore++;
-            scoreText.text = "Score: " + _totalScore;
+            scoreText.text = _totalScore.ToString();
             IncreaseScore();
         }
 
