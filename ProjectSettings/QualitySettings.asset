@@ -217,7 +217,7 @@ QualitySettings:
     streamingMipmapsMaxFileIORequests: 1024
     particleRaycastBudget: 4096
     asyncUploadTimeSlice: 2
-    asyncUploadBufferSize: 16
+    asyncUploadBufferSize: 24
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
     customRenderPipeline: {fileID: 11400000, guid: 15e5f8f429924f04b86c655da1738ad9, type: 2}

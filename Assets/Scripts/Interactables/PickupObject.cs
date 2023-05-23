@@ -21,13 +21,19 @@ namespace Interactables
 
         private void Pickup(PlayerController playerController)
         {
-            Transform transform1;
-            (transform1 = transform).SetParent(playerController.HoldPosition);
-            transform1.localPosition = Vector3.zero;
-            GetComponent<Rigidbody>().isKinematic = true;
+            Rigidbody rb = GetComponent<Rigidbody>();
+            rb.isKinematic = true;
+            rb.velocity = Vector3.zero; // Ensure that no forces are acting on the object.
+            rb.angularVelocity = Vector3.zero;
+
+            transform.SetParent(playerController.HoldPosition);
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity; // Reset rotation
+
             _isPickedUp = true;
             playerController.HeldObject = this;
         }
+
 
         private void Drop(PlayerController playerController)
         {
