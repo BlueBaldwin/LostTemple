@@ -6,7 +6,11 @@ using UnityEngine.Rendering;
 public class SoundManager : MonoBehaviour
 {
     [SerializeField] private AudioSource _MusicSource, _SFXSource;
+    [SerializeField] private AudioClip[] eventDialogClips;
+
+    private int _eventsTriggeredCount = 0;
     private static SoundManager _instance;
+    
     public static SoundManager Instance
     {
         get
@@ -27,7 +31,6 @@ public class SoundManager : MonoBehaviour
         }
     }
     
-    // Start is called before the first frame update
     void Awake()
     {
         if (_instance == null)
@@ -66,6 +69,24 @@ public class SoundManager : MonoBehaviour
         _SFXSource.PlayOneShot(clip);
     }
 
+    public void PlayEventDialog(int eventId)
+    {
+        if (eventId >= 0 && eventId < eventDialogClips.Length)
+        {
+            PlaySound(eventDialogClips[eventId], false);
+            _eventsTriggeredCount++;
+        }
+        else
+        {
+            Debug.LogError("Invalid event");
+        }
+    }
+
+    public int GetEventsTriggeredCount()
+    {
+        return _eventsTriggeredCount;
+    }
+    
     public void StopSFX(AudioClip SFX)
     {
         _SFXSource.Stop();
