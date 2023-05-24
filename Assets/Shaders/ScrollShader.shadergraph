@@ -268,20 +268,6 @@
             },
             "m_InputSlot": {
                 "m_Node": {
-                    "m_Id": "555daee24f21418abeecf17ce883bff5"
-                },
-                "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "dbaec2a1a90543b687c138d7734c63e0"
-                },
-                "m_SlotId": 2
-            },
-            "m_InputSlot": {
-                "m_Node": {
                     "m_Id": "f252012b9be844969d28887b952433fa"
                 },
                 "m_SlotId": 1
@@ -311,6 +297,20 @@
             "m_InputSlot": {
                 "m_Node": {
                     "m_Id": "205a28a3f112492083b88c1b5b14bee7"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "f252012b9be844969d28887b952433fa"
+                },
+                "m_SlotId": 2
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "555daee24f21418abeecf17ce883bff5"
                 },
                 "m_SlotId": 0
             }
@@ -1966,14 +1966,14 @@
     "m_ActiveSubTarget": {
         "m_Id": "99e7cd739ca441b581ca3fa20fbff198"
     },
-    "m_AllowMaterialOverride": true,
+    "m_AllowMaterialOverride": false,
     "m_SurfaceType": 1,
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
     "m_RenderFace": 0,
     "m_AlphaClip": false,
-    "m_CastShadows": true,
+    "m_CastShadows": false,
     "m_ReceiveShadows": true,
     "m_CustomEditorGUI": "",
     "m_SupportVFX": true

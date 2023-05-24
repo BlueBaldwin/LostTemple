@@ -105,20 +105,6 @@
                 "m_Node": {
                     "m_Id": "0ec453e80dd94b7283343df31fb03480"
                 },
-                "m_SlotId": 1
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "4b0a302079e34f78b32d07e40403f744"
-                },
-                "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "0ec453e80dd94b7283343df31fb03480"
-                },
                 "m_SlotId": 4
             },
             "m_InputSlot": {
@@ -369,6 +355,20 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
+                    "m_Id": "e5869dab9fd54c85b5e644f38592bb59"
+                },
+                "m_SlotId": 2
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "4b0a302079e34f78b32d07e40403f744"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
                     "m_Id": "eb171c4d5f844be28c8bc4e04d48a12d"
                 },
                 "m_SlotId": 1
@@ -516,9 +516,9 @@
     "m_ShaderOutputName": "BaseColor",
     "m_StageCapability": 2,
     "m_Value": {
-        "x": 0.5,
-        "y": 0.5,
-        "z": 0.5
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
     },
     "m_DefaultValue": {
         "x": 0.0,
@@ -575,10 +575,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 911.0,
-            "y": -65.00001525878906,
+            "x": 884.0,
+            "y": 46.0,
             "width": 120.0,
-            "height": 149.0
+            "height": 148.99998474121095
         }
     },
     "m_Slots": [
@@ -1584,14 +1584,14 @@
     "m_ActiveSubTarget": {
         "m_Id": "6db10ca21c484822af2e0e4215e11ae8"
     },
-    "m_AllowMaterialOverride": true,
+    "m_AllowMaterialOverride": false,
     "m_SurfaceType": 1,
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
     "m_RenderFace": 0,
     "m_AlphaClip": false,
-    "m_CastShadows": true,
+    "m_CastShadows": false,
     "m_ReceiveShadows": true,
     "m_CustomEditorGUI": "",
     "m_SupportVFX": true
