@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,6 +46,20 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        StartCoroutine(OpeningDialog());
+    }
+
+    private IEnumerator OpeningDialog()
+    { 
+        PlayerController.CanMove = false;
+        yield return new WaitForSeconds(1f);
+        PlayEventDialog(0);
+        yield return new WaitForSeconds(GetEventDialogClipLength(0));
+        PlayerController.CanMove = true;
+    }
+
     private void Initialise()
     {
         DontDestroyOnLoad(gameObject);
@@ -80,6 +95,11 @@ public class SoundManager : MonoBehaviour
         {
             Debug.LogError("Invalid event");
         }
+    }
+
+    public float GetEventDialogClipLength(int i)
+    {
+        return eventDialogClips[i].length;
     }
 
     public int GetEventsTriggeredCount()

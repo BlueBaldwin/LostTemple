@@ -32,6 +32,8 @@ namespace Audio
             if (_colliderAudioMap.TryGetValue(other, out var clip))
             {
                 SoundManager.Instance.PlaySound(clip, false);
+                _colliderAudioMap.Remove(other);
+                other.enabled = false;
             }
             else
             {

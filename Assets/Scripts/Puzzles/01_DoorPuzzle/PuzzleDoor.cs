@@ -66,12 +66,15 @@ namespace Puzzles
                 Debug.Log("Correct Weight! Door is opening!");
                 if (!_isDoorOpen)
                 {
+                    SoundManager.Instance.PlayEventDialog(1);
                     StartCoroutine(OpenDoor());
+                    StartCoroutine(PlayDoorOpenDialog());
                     _isDoorOpen = true;
                 }
             }
         }
 
+        // Testing method 
         public bool go;
         private void Update()
         {
@@ -80,7 +83,6 @@ namespace Puzzles
                 go = false;
                 Debug.Log("Correct Weight! Door is opening!");
                 StartCoroutine(OpenDoor());
-
             }
         }
 
@@ -102,7 +104,12 @@ namespace Puzzles
                 yield return null;
                 time += Time.deltaTime * doorOpenSpeed;
             }
-
+        }
+        
+        private IEnumerator PlayDoorOpenDialog()
+        {
+            yield return new WaitForSeconds(1f + SoundManager.Instance.GetEventDialogClipLength(1));
+            SoundManager.Instance.PlayEventDialog(2);
         }
        
         
