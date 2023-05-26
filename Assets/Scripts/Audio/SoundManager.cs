@@ -1,17 +1,13 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class SoundManager : MonoBehaviour
 {
     [SerializeField] private AudioSource _MusicSource, _SFXSource;
-    [SerializeField] private AudioClip[] eventDialogClips;
-
-    private int _eventsTriggeredCount = 0;
+    [SerializeField]  AudioClip musicClip;
     private static SoundManager _instance;
-    
+
     public static SoundManager Instance
     {
         get
@@ -23,21 +19,23 @@ public class SoundManager : MonoBehaviour
                 {
                     Debug.LogError("Sound manager not found in the scene.");
                 }
-                else
-                {
-                    _instance.Initialise();
-                }
             }
             return _instance;
         }
     }
-    
+
     void Awake()
     {
         if (_instance == null)
         {
             _instance = this;
-            Initialise();
+            DontDestroyOnLoad(gameObject);
+
+            // Make other audio children copy accross
+            foreach (Transform child in transform)
+            {
+                DontDestroyOnLoad(child.gameObject);
+            }
         }
         else if (_instance != this)
         {
@@ -46,34 +44,9 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        StartCoroutine(OpeningDialog());
-    }
-
-    private IEnumerator OpeningDialog()
-    { 
-        PlayerController.CanMove = false;
-        yield return new WaitForSeconds(1f);
-        PlayEventDialog(0);
-        yield return new WaitForSeconds(GetEventDialogClipLength(0));
-        PlayerController.CanMove = true;
-    }
-
-    private void Initialise()
-    {
-        DontDestroyOnLoad(gameObject);
-
-        // Make other audio children copy accross
-        foreach (Transform child in transform)
-        {
-            DontDestroyOnLoad(child.gameObject);
-        }
-    }
-
     public void PlaySound(AudioClip clip, bool loop)
     {
-        if (clip == null) return; //countdown clip is null after scene reload -- this is just to prevent errors
+        if (clip == null) return;
         if (loop)
         {
             _SFXSource.clip = clip;
@@ -84,30 +57,12 @@ public class SoundManager : MonoBehaviour
         _SFXSource.PlayOneShot(clip);
     }
 
-    public void PlayEventDialog(int eventId)
+    public float GetClipLength(AudioClip clip)
     {
-        if (eventId >= 0 && eventId < eventDialogClips.Length)
-        {
-            PlaySound(eventDialogClips[eventId], false);
-            _eventsTriggeredCount++;
-        }
-        else
-        {
-            Debug.LogError("Invalid event");
-        }
+        return clip.length;
     }
 
-    public float GetEventDialogClipLength(int i)
-    {
-        return eventDialogClips[i].length;
-    }
-
-    public int GetEventsTriggeredCount()
-    {
-        return _eventsTriggeredCount;
-    }
-    
-    public void StopSFX(AudioClip SFX)
+    public void StopSFX()
     {
         _SFXSource.Stop();
     }
@@ -126,4 +81,16 @@ public class SoundManager : MonoBehaviour
     {
         _SFXSource.volume = value;
     }
+
+    public void PlayMusic()
+    {
+        _MusicSource.clip = musicClip;
+        _MusicSource.Play();
+    }
+
+    // private IEnumerator PlayMusicCoroutine(AudioClip music)
+    // {
+    //     yield return new WaitForSeconds(GetClipLength(music) + 0.5f);
+    //     _MusicSource.Play();
+    // }
 }

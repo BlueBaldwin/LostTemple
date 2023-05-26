@@ -1,33 +1,29 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Audio;
 using DefaultNamespace;
+using RewardSystem;
 using UnityEngine;
 
 namespace Puzzles
 {
+    // This class is the logic for the scales puzzle and checks the weight of the scales to see if the puzzle is solved
     public class PuzzleDoor : MonoBehaviour
     {
-        // inspector header
-        [Header("Door Settings")]
-        [SerializeField] private GameObject leftDoor;
-        [SerializeField] private GameObject rightDoor;
-        [SerializeField] private float doorOpenSpeed;
-        
-        [Header("Scale Settings")]
+        [Header("Door Settings")] 
+        [SerializeField] private Door door;
         [SerializeField] private Scale scale1;
         [SerializeField] private Scale scale2;
         [SerializeField] private int answerWeight;
 
-        [Header("Camera Shake Settings")]
-        [SerializeField] private float shakeDuration;
-        
+        [Header("Camera Shake Settings")] [SerializeField]
+        private float shakeDuration;
+
         private int _scale1Weight;
         private int _scale2Weight;
         private bool _isDoorOpen;
 
-        private CameraController _cameraController;
-        
         private void OnEnable()
         {
             scale1.OnWeightChanged += UpdateScale1Weight;
@@ -38,11 +34,6 @@ namespace Puzzles
         {
             scale1.OnWeightChanged -= UpdateScale1Weight;
             scale2.OnWeightChanged -= UpdateScale2Weight;
-        }
-
-        private void Awake()
-        {
-            _cameraController = FindObjectOfType<CameraController>();
         }
 
         private void UpdateScale1Weight(int weightChange)
@@ -58,60 +49,27 @@ namespace Puzzles
             _scale2Weight = weightChange;
             CheckPuzzleSolved();
         }
-        
+
         private void CheckPuzzleSolved()
-        { 
+        {
             if (_scale1Weight + _scale2Weight == answerWeight)
             {
                 Debug.Log("Correct Weight! Door is opening!");
                 if (!_isDoorOpen)
                 {
-                    SoundManager.Instance.PlayEventDialog(1);
-                    StartCoroutine(OpenDoor());
-                    StartCoroutine(PlayDoorOpenDialog());
+                    StartCoroutine(PlayDialogAndOpenDoor());
+                    PuzzleManager.PuzzleSolved("WeightPuzzle", 5);
                     _isDoorOpen = true;
                 }
             }
         }
 
-        // Testing method 
-        public bool go;
-        private void Update()
+        private IEnumerator PlayDialogAndOpenDoor()
         {
-            if (go)
-            {
-                go = false;
-                Debug.Log("Correct Weight! Door is opening!");
-                StartCoroutine(OpenDoor());
-            }
+            DialogManager.Instance.PlayEventDialog(1);
+            yield return new WaitForSeconds(DialogManager.Instance.GetDialogClipLength(1));
+            door.Open();
+            DialogManager.Instance.PlayEventDialog(2);
         }
-
-        private IEnumerator OpenDoor()
-        {
-            CameraShake.Instance.ShakeCamera();
-            Vector3 leftDoorStartPosition = leftDoor.transform.position;
-            Vector3 rightDoorStartPosition = rightDoor.transform.position;
-            float slideAmount = 1.5f;
-
-            Vector3 leftDoorEndPosition = leftDoorStartPosition + slideAmount * Vector3.left;
-            Vector3 rightDoorEndPosition = rightDoorStartPosition + slideAmount * Vector3.right;
-            float time = 0;
-            while (time < 1)
-            {
-                leftDoor.transform.position = Vector3.Lerp(leftDoorStartPosition, leftDoorEndPosition, time);
-                rightDoor.transform.position = Vector3.Lerp(rightDoorStartPosition, rightDoorEndPosition, time);
-                
-                yield return null;
-                time += Time.deltaTime * doorOpenSpeed;
-            }
-        }
-        
-        private IEnumerator PlayDoorOpenDialog()
-        {
-            yield return new WaitForSeconds(1f + SoundManager.Instance.GetEventDialogClipLength(1));
-            SoundManager.Instance.PlayEventDialog(2);
-        }
-       
-        
     }
 }

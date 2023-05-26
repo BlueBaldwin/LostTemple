@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
         CanMove = true;
     }
     
-
     private void OnEnable()
     {
         _input.Enable();

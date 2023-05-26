@@ -5,6 +5,7 @@ using Interactables;
 
 namespace Puzzles
 {
+    // This class handles the scale weights placement and updates the total weight
     public class Scale : MonoBehaviour
     {
         [SerializeField] private Transform weightSlot1;

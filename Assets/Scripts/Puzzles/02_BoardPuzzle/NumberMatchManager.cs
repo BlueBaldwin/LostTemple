@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Cinemachine;
+using RewardSystem;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 namespace Puzzles
 {
+    // This class handles the primary logic for the number match puzzle, constructing the actual puzzle using the puzzle generator
     public class NumberMatchManager : MonoBehaviour
     {
         [Header("Puzzle Settings")]
@@ -27,8 +26,6 @@ namespace Puzzles
         public int RoundIndex => _roundIndex;
 
         public event Action OnPuzzleGenerate;
-        
-        public static event Action<int> OnPuzzleComplete;
 
         private void Awake()
         {
@@ -113,7 +110,9 @@ namespace Puzzles
             {
                 Debug.Log("Puzzle Complete");
                 PlayerController.CanMove = true;
-                OnPuzzleComplete?.Invoke(GetPlayersScore());
+                ////////////////////////////////////////////////////////////////////////////////////////////
+                // TO:DO Make the reward system work
+                PuzzleManager.PuzzleSolved("NumberMatchPuzzle", 10);
             }
             else
             {

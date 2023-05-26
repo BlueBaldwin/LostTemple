@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using Cinemachine;
+using RewardSystem;
 
 namespace Puzzles
 {
+    // A simple class that toggles the puzzle camera on and off, and disables the puzzle trigger after the puzzle is solved
     public class ToggleBoardPuzzle : MonoBehaviour
     {
         [SerializeField] private GameObject canvas;
@@ -19,13 +21,13 @@ namespace Puzzles
         private void OnEnable()
         {
             _puzzleTrigger.onPuzzleBoardToggle += TogglePuzzleCameraOn;
-            NumberMatchManager.OnPuzzleComplete += TogglePuzzleCameraOff;
+            PuzzleManager.OnPuzzleSolved += TogglePuzzleCameraOff;
         }
 
         private void OnDisable()
         {
             _puzzleTrigger.onPuzzleBoardToggle -= TogglePuzzleCameraOn;
-            NumberMatchManager.OnPuzzleComplete -= TogglePuzzleCameraOff;
+            PuzzleManager.OnPuzzleSolved -= TogglePuzzleCameraOff;
         }
 
         private void TogglePuzzleCameraOn()
@@ -37,16 +39,20 @@ namespace Puzzles
             canvas.gameObject.SetActive(true);
         }
         
-        private void TogglePuzzleCameraOff(int i)
+        private void TogglePuzzleCameraOff(PuzzleSolvedEvent puzzleSolvedEvent)
         {
-            puzzleVirtualCamera.Priority = 0;
-            playerVirtualCamera.Priority = 1;
-            canvas.gameObject.SetActive(false);
-            
-            if (_puzzleTrigger != null)
+            if (puzzleSolvedEvent.PuzzleId == "NumberMatchPuzzle")
             {
-                Destroy(_puzzleTrigger);
+                puzzleVirtualCamera.Priority = 0;
+                playerVirtualCamera.Priority = 1;
+                canvas.gameObject.SetActive(false);
+                
+                if (_puzzleTrigger != null)
+                {
+                    Destroy(_puzzleTrigger);
+                }
             }
+            
         }
 
         

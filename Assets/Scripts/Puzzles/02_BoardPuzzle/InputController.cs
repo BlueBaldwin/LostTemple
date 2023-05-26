@@ -3,10 +3,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using Cinemachine; 
+using Cinemachine;
+using RewardSystem;
 
 namespace Puzzles
 {
+    // Handles the input for the number match puzzle, using a specific camera for raycasting into the in world puzzle board tiles
     public class InputController : MonoBehaviour
     {
         [SerializeField] private Camera puzzleInputCamera;
@@ -24,12 +26,12 @@ namespace Puzzles
 
         private void OnEnable()
         {
-            NumberMatchManager.OnPuzzleComplete += DisableInput;
+            PuzzleManager.OnPuzzleSolved += DisableInput;
         }
 
         private void OnDisable()
         {
-            NumberMatchManager.OnPuzzleComplete -= DisableInput;
+            PuzzleManager.OnPuzzleSolved  -= DisableInput;
         }
 
         private void Update()
@@ -133,9 +135,12 @@ namespace Puzzles
             Debug.DrawRay(hoverRay.origin, hoverRay.direction * 100, Color.red);
         }
 
-        private void DisableInput(int i)
+        private void DisableInput(PuzzleSolvedEvent puzzleSolvedEvent)
         {
-            _isPuzzleCompleted = true;
+            if (puzzleSolvedEvent.PuzzleId == "NumberMatchPuzzle")
+            {
+                _isPuzzleCompleted = true;
+            }
         }
     }
 }
