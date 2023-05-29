@@ -50,5 +50,10 @@ namespace Puzzles
         {
             _renderer.color = active ? _highlightedColor : _initialColor;
         }
+
+        public void ShowIncorrectChoice()
+        {
+            _renderer.color = Color.red;
+        }
     }
 }

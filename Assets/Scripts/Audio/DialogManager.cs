@@ -63,7 +63,7 @@ namespace Audio
         {
             if (eventId >= 0 && eventId < eventDialogClips.Length)
             {
-                _soundManager.PlaySound(eventDialogClips[eventId], false);
+                _soundManager.PlayDialog(eventDialogClips[eventId]);
                 _eventsTriggeredCount++;
                 if (!_isIntroDialogPlayed)
                 {

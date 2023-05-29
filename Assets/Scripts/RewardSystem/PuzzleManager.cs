@@ -18,6 +18,7 @@ namespace RewardSystem
         {
             Transform spawnLocation = _puzzleIdToSpawnLocation[puzzleId];
             OnPuzzleSolved?.Invoke(new PuzzleSolvedEvent(puzzleId, rewardQuantity, spawnLocation));
+            PuzzleTrigger.IsPuzzleBoardActive = false;
         }
     }
 }

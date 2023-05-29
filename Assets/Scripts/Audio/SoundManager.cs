@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
+using Audio;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] private AudioSource _MusicSource, _SFXSource;
+    [SerializeField] private AudioSource _MusicSource, _SFXSource, _DialogSource;
     [SerializeField]  AudioClip musicClip;
+    
+    private AudioAnalyzer _audioAnalyzer;
     private static SoundManager _instance;
 
     public static SoundManager Instance
@@ -42,6 +45,8 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        _audioAnalyzer = GetComponent<AudioAnalyzer>();
     }
 
     public void PlaySound(AudioClip clip, bool loop)
@@ -55,6 +60,14 @@ public class SoundManager : MonoBehaviour
             return;
         }
         _SFXSource.PlayOneShot(clip);
+    }
+    
+    public void PlayDialog(AudioClip clip)
+    {
+        if (clip == null) return;
+        _DialogSource.clip = clip;
+        _DialogSource.Play();
+        _audioAnalyzer.audioSource = _DialogSource;
     }
 
     public float GetClipLength(AudioClip clip)

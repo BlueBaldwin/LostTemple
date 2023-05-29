@@ -63,6 +63,7 @@ namespace Puzzles
             }
         }
 
+        // Simple method to get the min and max for the difficulty based on the Puzzle difficulty enum
         // Returns a tuple - returning two ints for the min and max :)
         private (int min, int max) GetMinMaxForDifficulty(PuzzleDifficulty difficulty)
         {

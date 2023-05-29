@@ -28,15 +28,16 @@ namespace Audio
                 _colliderAudioMap.Add(dialogTriggers[i], dialogClips[i]);
                 _colliderSequence.Add(dialogTriggers[i]);
             }
-            // Setting t
+            // Setting the
             dialogTriggers[3].enabled = false;
+            dialogTriggers[4].enabled = false;
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (_colliderAudioMap.TryGetValue(other, out var clip))
             {
-                SoundManager.Instance.PlaySound(clip, false);
+                SoundManager.Instance.PlayDialog(clip);
                 _colliderAudioMap.Remove(other);
                 other.enabled = false;
                 
@@ -48,6 +49,7 @@ namespace Audio
                     nextCollider.enabled = true;
                 }
             }
+            
         }
     }
 }

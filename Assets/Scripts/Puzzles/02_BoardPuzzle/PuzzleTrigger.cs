@@ -7,6 +7,7 @@ using UnityEngine;
 public class PuzzleTrigger : MonoBehaviour
 {
     public Action onPuzzleBoardToggle;
+    public static bool IsPuzzleBoardActive { get; set; }
     
     private void OnTriggerEnter(Collider other)
     {
@@ -14,6 +15,7 @@ public class PuzzleTrigger : MonoBehaviour
         {
             onPuzzleBoardToggle?.Invoke();
             PlayerController.CanMove = false;
+            IsPuzzleBoardActive = true;
         }
     }
 }

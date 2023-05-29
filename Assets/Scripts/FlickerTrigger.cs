@@ -15,7 +15,7 @@ public class FlickerTrigger : MonoBehaviour
         if (_playReminderDialog && !_hasEntered)
         {
             _hasEntered = true;
-            SoundManager.Instance.PlaySound(reminderDialogClip, false);
+            SoundManager.Instance.PlayDialog(reminderDialogClip);
         }
     }
 

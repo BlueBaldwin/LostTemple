@@ -36,7 +36,7 @@ namespace Puzzles
 
         private void Update()
         {
-            if (!_isPuzzleCompleted)
+            if (!_isPuzzleCompleted && PuzzleTrigger.IsPuzzleBoardActive)
             {
                 HandleMouseInput();
             }
@@ -77,6 +77,8 @@ namespace Puzzles
                         Debug.Log("Incorrect answer!");
 
                         // Clear the selection
+                        _selectedTile1.ShowIncorrectChoice();
+                        _selectedTile2.ShowIncorrectChoice();
                         StartCoroutine(ResetTileSelection());
                     }
                 }
